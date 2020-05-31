@@ -1,6 +1,4 @@
 steps:
-  - name: ‘docker/compose:1.19.0’
-    args: [‘up’, ‘-d’]
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['builds', 'submit', './app', '--tag', 'gcr.io/nodejs-mysql-api-274500/test-sre', '--project', 'nodejs-mysql-api-274500']
   - name: 'gcr.io/cloud-builders/gcloud'
