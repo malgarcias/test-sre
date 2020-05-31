@@ -3,7 +3,7 @@ services:
   app:
     build: ./app
     ports:
-      - 8989:8989
+      - "${WEB_PORT}:${WEB_PORT}"
     env_file:
       - ./.env
     volumes:
