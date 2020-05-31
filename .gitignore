@@ -105,3 +105,4 @@ dist
 
 test-sre.code-workspace
 kubernetes
+app/package-lock.json
