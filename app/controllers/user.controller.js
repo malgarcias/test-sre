@@ -18,8 +18,8 @@ function getDbPool() {
 
 // Retrieve and return single person from the database.
 exports.login = (req, res) => {
-    getDbPool().query('select * from users where id=?',
-        [req.params.id],
+    getDbPool().query('select * from users where name=? and password=?',
+        [req.body.name,req.body.password],
         function (error, results, fields) {
             if (error) {
                 return res.status(500).send({
