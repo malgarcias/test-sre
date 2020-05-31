@@ -16,7 +16,8 @@ function getDbPool() {
     return cachedDb2;
 }
 
-// transaction test. TODO: add the actual db login functions
+// transaction test. 
+// TODO: add the actual db login functions
 exports.login = (req, res) => {
     getDbPool().query('select * from users where name=? and password=?',
         [req.body.name,req.body.password],
