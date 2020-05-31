@@ -1,5 +1,10 @@
-test-sre:
-  build: .
-  ports:
-    - "8980:8980"
-  #image: marcelodevops:test-sre
+version: '3'
+services:
+  app:
+    build: ./app
+    ports:
+      - "8980:8980"
+    depends_on:
+      - db
+  db:
+    build: ./db
