@@ -8,7 +8,7 @@ function getDbPool() {
             password: process.env.MYSQL_PASSWORD,
             database: process.env.MYSQL_DATABASE,
             //socketPath: `/cloudsql/${process.env.INST_CON_NAME}`
-            host: '172.0.0.1',
+            host: 'localhost',
             //port: 3306
         });
 

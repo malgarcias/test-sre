@@ -7,8 +7,7 @@ app.use(bodyParser.json());
 
 const port = process.env.PORT || 8989;
 
-//import required routes
-require('./routes/login.routes.js')(app);
+
 
 app.get('/', async (req, res) =>{
     res.json({ status: 'Server is ready to accept requests'});
@@ -20,7 +19,8 @@ app.get('/', async (req, res) =>{
 
 
 
-
+//import required routes
+require('./routes/login.routes.js')(app);
 
 
 //start listening on defined port
