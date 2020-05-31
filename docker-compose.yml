@@ -3,8 +3,16 @@ services:
   app:
     build: ./app
     ports:
-      - "8980:8980"
+      - 8989:8989
+    env_file:
+      - ./.env
+    volumes:
+     - ./app:/app
     depends_on:
       - db
   db:
     build: ./db
+    ports:
+      - "3306:3306"
+    env_file:
+      - ./.env

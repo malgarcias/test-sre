@@ -10,13 +10,15 @@ CREATE TABLE `users` (
   `lastname` varchar(200) NOT NULL,
   `password` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 --
 -- 转存表中的数据 `test`
 --
 
 INSERT INTO `users` (`id`, `name`, `lastname`, `password`) VALUES
-(NULL, 'kylin', 'thomas', '1111');
+('', 'kylin', 'thomas', '1111');
 
 --
 -- Indexes for dumped tables

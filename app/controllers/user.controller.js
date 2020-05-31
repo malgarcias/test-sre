@@ -4,11 +4,11 @@ function getDbPool() {
     if (!cachedDb2) {
         cachedDb2 = mysql.createPool({
             connectionLimit: 1,
-            user: process.env.SQL_USER,
-            password: process.env.SQL_PASSWORD,
-            database: process.env.SQL_NAME,
-            socketPath: `/cloudsql/${process.env.INST_CON_NAME}`
-            //host: '35.188.208.20',
+            user: process.env.MYSQL_USER,
+            password: process.env.MYSQL_PASSWORD,
+            database: process.env.MYSQL_DATABASE,
+            //socketPath: `/cloudsql/${process.env.INST_CON_NAME}`
+            host: '172.0.0.1',
             //port: 3306
         });
 

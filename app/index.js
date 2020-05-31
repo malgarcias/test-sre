@@ -5,7 +5,7 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
-const port = process.env.PORT || 8980;
+const port = process.env.PORT || 8989;
 
 app.get('/', async (req, res) =>{
     res.json({ status: 'Server is ready to accept requests'});
