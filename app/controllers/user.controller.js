@@ -4,9 +4,9 @@ function getDbPool() {
     if (!cachedDb2) {
         cachedDb2 = mysql.createPool({
             connectionLimit: 1,
-            user: process.env.MYSQL_USER,
-            password: process.env.MYSQL_PASSWORD,
-            database: process.env.MYSQL_DATABASE,
+            user: 'test-sre',//process.env.MYSQL_USER,
+            password: 'Passw0rd',// process.env.MYSQL_PASSWORD,
+            database: 'test-sre',//process.env.MYSQL_DATABASE,
             //socketPath: `/cloudsql/${process.env.INST_CON_NAME}`
             host: 'localhost',
             //port: 3306
@@ -16,7 +16,7 @@ function getDbPool() {
     return cachedDb2;
 }
 
-// Retrieve and return single person from the database.
+// transaction test. TODO: add the actual db login functions
 exports.login = (req, res) => {
     getDbPool().query('select * from users where name=? and password=?',
         [req.body.name,req.body.password],

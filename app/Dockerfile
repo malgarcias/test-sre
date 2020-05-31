@@ -9,8 +9,8 @@ COPY package.json /usr/src/app
 RUN npm install 
 COPY . /usr/src/app
 
-HEALTHCHECK --interval=15s --timeout=10s --retries=3 CMD curl -f http://localhost:APP_PORT/health || exit 1
+HEALTHCHECK --interval=15s --timeout=10s --retries=3 CMD curl -f http://localhost:8980/health || exit 1
 
-EXPOSE 8989
+EXPOSE 8980
 
 CMD [ "node", "index.js" ]

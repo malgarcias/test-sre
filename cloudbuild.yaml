@@ -13,3 +13,5 @@ steps:
     - '--platform'
     - 'managed'
     - '--allow-unauthenticated'
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['builds', 'submit', './db', '--tag', 'gcr.io/nodejs-mysql-api-274500/test-sre-db', '--project', 'nodejs-mysql-api-274500']
