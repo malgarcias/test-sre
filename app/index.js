@@ -18,6 +18,6 @@ router.get('/', function(req, res) {
 //route to handle user registration
 router.post('/register',login.register);
 router.post('/login',login.login)
-const port = process.env.WEB_PORT || 8500;
+const port = process.env.WEB_PORT || 8080;
 app.use('/api', router);
 app.listen(port);
