@@ -1,12 +1,19 @@
 const mysql      = require('mysql');
+const bcrypt     = require('bcrypt');
 const connection = mysql.createConnection({
   
   user     : process.env.MYSQL_USER,
   password : process.env.MYSQL_ROOT_PASSWORD,
-  database : process.env.MYSQL_DATABASE,
+  database : process.env.MYSQL_DATABASE_NAME,
   //socketPath: `/cloudsql/${process.env.INST_CONN_NAME}`
   host     : process.env.MYSQL_HOST
+  
 });
+console.log("host " + process.env.MYSQL_HOST);
+console.log("password " + process.env.MYSQL_ROOT_PASSWORD);
+console.log("db " + process.env.MYSQL_DATABASE_NAME);
+console.log("user " + process.env.MYSQL_USER);
+
 connection.connect(function(err){
 if(!err) {
     console.log("Database is connected ... nn");
