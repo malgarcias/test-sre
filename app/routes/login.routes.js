@@ -4,8 +4,8 @@ const connection = mysql.createConnection({
   user     : process.env.MYSQL_USER,
   password : process.env.MYSQL_ROOT_PASSWORD,
   database : process.env.MYSQL_DATABASE,
-  socketPath: `/cloudsql/${process.env.INST_CONN_NAME}`
-  //host     : process.env.MYSQL_HOST
+  //socketPath: `/cloudsql/${process.env.INST_CONN_NAME}`
+  host     : process.env.MYSQL_HOST
 });
 connection.connect(function(err){
 if(!err) {

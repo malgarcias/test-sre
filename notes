@@ -2,3 +2,50 @@ host     : '35.188.178.37',
 user     : 'root',
 password : 'bJtcAhFslsI2uooc',
 database : 'apidb'
+instance_connection_name : nodejs-mysql-api-274500:us-central1:sre-rest-api
+
+CREATE TABLE `users` (
+ `id` int(30) COLLATE utf8_unicode_ci NOT NULL,
+ `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+ `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+ALTER TABLE users add PRIMARY KEY (id);
+ALTER TABLA CHANGE id id int(30) AUTO_INCREMENT;
+
+####################
+gcloud iam service-accounts create ansible-sa \
+     --display-name "Service account for Ansible"
+
+gcloud compute project-info add-metadata \
+    --metadata enable-oslogin=TRUE
+
+for role in \
+    'roles/compute.instanceAdmin' \
+    'roles/compute.instanceAdmin.v1' \
+    'roles/compute.osAdminLogin' \
+    'roles/iam.serviceAccountUser'
+do \
+gcloud projects add-iam-policy-binding \
+        nodejs-mysql-api-274500 \
+        --member='serviceAccount:ansible-sa@nodejs-mysql-api-274500.iam.gserviceaccount.com' \
+        --role="${role}"
+done
+
+gcloud iam service-accounts keys create \
+    .gcp/gcp-key-ansible-sa.json \
+    --iam-account=ansible-sa@nodejs-mysql-api-274500.iam.gserviceaccount.com
+
+ssh-keygen -f ssh-key-ansible-sa
+
+gcloud auth activate-service-account \
+    --key-file=.gcp/gcp-key-ansible-sa.json
+gcloud config set account your@gamil.com
+
+
+gcloud iam service-accounts describe \
+    ansible-sa@nodejs-mysql-api-274500.iam.gserviceaccount.com \
+    --format='value(uniqueId)'
+    104435124234002324598
+ssh -i ~/.ssh/ssh-key-ansible-sa sa_104435124234002324598@10.0.0.44
+...
