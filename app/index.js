@@ -19,5 +19,5 @@ router.get('/', function(req, res) {
 router.post('/register',login.register);
 router.post('/login',login.login)
 const port = process.env.WEB_PORT || 8080;
-app.use('/api', router);
+app.use('/', router);
 app.listen(port);
