@@ -1,5 +1,8 @@
 const mysql      = require('mysql');
 const bcrypt     = require('bcrypt');
+
+const saltRounds = 10;
+
 const connection = mysql.createConnection({
   
   user     : process.env.MYSQL_USER,
