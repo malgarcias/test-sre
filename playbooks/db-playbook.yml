@@ -41,7 +41,7 @@
       name: git
       state: present
   
-  - name: git commit backup 
+  - name: git clone repository code
     git:
       repo: https://github.com/marcelodevops/test-sre.git
       dest: /tmp/repos/test-sre
