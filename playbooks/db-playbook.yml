@@ -1,0 +1,42 @@
+
+---
+- name: Create a new database with name apidb
+  hosts: databases
+  vars: 
+    - login_user: "marce"
+    - login_password: "Passw0rd"
+    - mysql_root_password: "Passw0rd"
+  remote_user: sa_104435124234002324598
+  become: yes
+
+  tasks:
+
+
+  - name: create mysql database
+    mysql_db:
+      login_unix_socket: /var/lib/mysql/mysql.sock
+      name: apidb
+      state: present
+      login_user: marce
+      login_password: "{{mysql_root_password}}"
+
+  - name: mysql user login
+    mysql_user:
+      login_user: marce
+      login_password: "{{mysql_root_password}}"
+      name: marce
+      host_all: yes     
+      password: "{{mysql_root_password}}"
+
+  - name: mysql dump database
+    mysql_db:
+      login_unix_socket: /var/lib/mysql/mysql.sock
+      name: apidb
+      state: dump
+      target: /tmp/apidb.sql
+      login_user: marce
+      login_password: "{{mysql_root_password}}"   
+  - name: commit backup 
+    git:
+      repo: https://github.com/marcelodevops/test-sre.git
+      dest: /tmp/repos
