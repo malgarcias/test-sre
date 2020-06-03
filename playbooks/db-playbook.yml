@@ -36,7 +36,18 @@
       target: /tmp/apidb.sql
       login_user: marce
       login_password: "{{mysql_root_password}}"   
-  - name: commit backup 
+  - name: check git is installed
+    yum:
+      name: git
+      state: present
+  
+  - name: git commit backup 
     git:
       repo: https://github.com/marcelodevops/test-sre.git
-      dest: /tmp/repos
+      dest: /tmp/repos/test-sre
+      update: yes
+      version: master
+  - name: copy backup sql into local repo
+    command: cp -r /tmp/apidb.sql /tmp/repos/test-sre
+
+ 
