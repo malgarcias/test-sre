@@ -17,7 +17,7 @@
       login_unix_socket: /var/lib/mysql/mysql.sock
       name: apidb
       state: present
-      login_user: marce
+      login_user: "{{login_user}}"
       login_password: "{{mysql_root_password}}"
 
   - name: mysql user login
@@ -47,7 +47,13 @@
       dest: /tmp/repos/test-sre
       update: yes
       version: master
-  - name: copy backup sql into local repo
-    command: cp -r /tmp/apidb.sql /tmp/repos/test-sre
+  - name: install gpg
+    yum: name=gpg state=present
+
+  - name: copy backup sql into local repo and encrypt
+    copy: src=/tmp/apidb.sql dest=/tmp/repos/test-sre
+
+ 
+
 
  
