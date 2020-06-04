@@ -51,8 +51,10 @@
     yum: name=gpg state=present
 
   - name: copy backup sql into local repo and encrypt
-    copy: src=/tmp/apidb.sql dest=/tmp/repos/test-sre
-
+    copy: 
+      src: "/tmp/apidb.sql"  
+      dest: "/tmp/repos/test-sre/"
+      remote_src: yes
  
 
 
