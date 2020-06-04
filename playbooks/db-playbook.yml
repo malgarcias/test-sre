@@ -61,6 +61,6 @@
       name: "apidb hourly dump"
       minute: "0"
       hour: "*"
-      job: "mysqldump apidb -u {{login_user}} -p{{login_password}} > /tmp/repos/test-sre/apidb.sql"
+      job: "mysqldump apidb -u {{login_user}} -p{{login_password}} > /tmp/repos/test-sre/$(date +\\%Y\\%m\\%d\\%H\\%M\\%S).sql"
 
 
