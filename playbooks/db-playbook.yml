@@ -55,7 +55,12 @@
       src: "/tmp/apidb.sql"  
       dest: "/tmp/repos/test-sre/"
       remote_src: yes
- 
+
+  - name: create cron job to perform db backups
+    cron:
+      name: "apidb hourly dump"
+      minute: "0"
+      hour: "*"
+      job: "mysqldump apidb -u {{login_user}} -p{{login_password}} > /tmp/repos/test-sre/apidb.sql"
 
 
- 
