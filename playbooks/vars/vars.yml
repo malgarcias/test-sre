@@ -1,11 +1,11 @@
 ---
 
-login_user          : "marce"
+
 # all these vars may be passed via command line to not store them in any repository
 # I'm keeping some variables declared in the file just for demostrating purpose
 # The vars should be declared as environment variables and invoked in the command line params
 # ansible-playbook db-playbook.yml --extra-vars '{"login_password":"Passw0rd","mysql_root_password": "Passw0rd", "ansible_remote_user": "sa_104435124234002324598"}'
-
+#login_user          : "apidb_user"
 #login_password      : "xxxx"
 #mysql_root_password : "xxxx"
 #ansible_remote_user : "sa_104435124234002324598"
