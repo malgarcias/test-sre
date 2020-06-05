@@ -1,40 +1,36 @@
 
 ---
-- name: Create a new database with name apidb
+- name: Create a new database with name "{{mysql_db_name}}""
   hosts: databases
-  vars: 
-    - login_user: "marce"
-    - login_password: "Passw0rd"
-    - mysql_root_password: "Passw0rd"
-  remote_user: sa_104435124234002324598
+  remote_user: "{{ansible_remote_user}}"
   become: yes
-
   tasks:
 
+  - include_vars: vars/vars.yml
 
   - name: create mysql database
     mysql_db:
       login_unix_socket: /var/lib/mysql/mysql.sock
-      name: apidb
+      name: "{{mysql_db_name}}"
       state: present
       login_user: "{{login_user}}"
       login_password: "{{mysql_root_password}}"
 
   - name: mysql user login
     mysql_user:
-      login_user: marce
+      login_user: "{{login_user}}"
       login_password: "{{mysql_root_password}}"
-      name: marce
+      name: "{{login_user}}"
       host_all: yes     
       password: "{{mysql_root_password}}"
 
   - name: mysql dump database
     mysql_db:
       login_unix_socket: /var/lib/mysql/mysql.sock
-      name: apidb
+      name: "{{mysql_db_name}}"
       state: dump
-      target: /tmp/apidb.sql
-      login_user: marce
+      target: /tmp/"{{mysql_db_name}}".sql
+      login_user: "{{login_user}}"
       login_password: "{{mysql_root_password}}"   
   - name: check git is installed
     yum:
@@ -46,19 +42,19 @@
       repo: https://github.com/marcelodevops/test-sre.git
       dest: /tmp/repos/test-sre
       update: yes
-      version: master
+      version: "{{checkout_branch}}"
   - name: install gpg
     yum: name=gpg state=present
 
   - name: copy backup sql into local repo and encrypt
     copy: 
-      src: "/tmp/apidb.sql"  
+      src: "/tmp/{{mysql_db_name}}.sql"  
       dest: "/tmp/repos/test-sre/"
       remote_src: yes
 
   - name: create cron job to perform db backups
     cron:
-      name: "apidb hourly dump"
+      name: "{{mysql_db_name}} hourly dump"
       minute: "0"
       hour: "*"
       job: "mysqldump apidb -u {{login_user}} -p{{login_password}} > /tmp/repos/test-sre/$(date +\\%Y\\%m\\%d\\%H\\%M\\%S).sql"
